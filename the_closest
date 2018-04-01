@@ -1,0 +1,14 @@
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+import re
+
+def search_the_closest(query):
+    file = open("test.txt", "r")
+    doclist = [line for line in file]
+    docstr = ''.join(doclist)
+    choices = re.split(r'[.!?]', docstr)
+    x = process.extractOne(query, choices)
+    return x
+
+print(search_the_closest("B Obama"))
+
