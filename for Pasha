@@ -1,0 +1,34 @@
+#все максимально просто
+#бібліотеки
+
+from fuzzywuzzy import fuzz
+
+from fuzzywuzzy import process
+
+import re
+
+
+
+def search_the_closest(query):
+    #тут ми считували з файлу ,бо не мали вибірки і просто шукали в масиві
+    
+    file = open("test.txt", "r")
+
+    doclist = [line for line in file]
+
+    docstr = ''.join(doclist)
+
+    choices = re.split(r'[.!?]', docstr)
+    #функція з бібліотеки яка повертає найближче ,проте в такому випадку вона виведе("closest",70) число це наскільки відсотків збігається
+    #тобто якщо щось можемо регулювати щоб воно не виводило якщо найбільше буде збігатися на 10%
+    #щоб повернуло просто значення ретурн x[0]
+    
+    
+    x = process.extractOne(query, choices)
+
+    return x
+
+
+
+print(search_the_closest("B Obama"))
+
